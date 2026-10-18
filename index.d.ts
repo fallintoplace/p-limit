@@ -10,7 +10,7 @@ export type LimitFunction = {
 	readonly pendingCount: number;
 
 	/**
-	Get or set the concurrency limit.
+	Get or set the concurrency limit. It must be a positive integer or `Infinity`.
 	*/
 	concurrency: number;
 

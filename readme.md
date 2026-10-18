@@ -107,7 +107,7 @@ This is recommended if you await the returned promises, for example with `Promis
 
 ### limit.concurrency
 
-Get or set the concurrency limit.
+Get or set the concurrency limit. It must be a positive integer or `Infinity`.
 
 ### limitFunction(fn, options) <sup>named export</sup>
 

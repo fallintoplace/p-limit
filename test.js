@@ -424,6 +424,18 @@ test('throws on invalid concurrency argument', t => {
 	});
 
 	t.throws(() => {
+		pLimit(Number.NaN);
+	});
+
+	t.throws(() => {
+		pLimit(Number.NEGATIVE_INFINITY);
+	});
+
+	t.throws(() => {
+		pLimit('2');
+	});
+
+	t.throws(() => {
 		pLimit(undefined);
 	});
 
@@ -438,6 +450,30 @@ test('throws on invalid concurrency argument', t => {
 	t.throws(() => {
 		pLimit({concurrency: 0});
 	});
+
+	t.throws(() => {
+		pLimit({concurrency: 1.2});
+	});
+});
+
+test('accepts Infinity as a concurrency limit', async t => {
+	t.is(pLimit(Infinity).concurrency, Infinity);
+	t.is(pLimit({concurrency: Infinity}).concurrency, Infinity);
+	t.true(await limitFunction(() => true, {concurrency: Infinity})());
+
+	const limit = pLimit(1);
+	limit.concurrency = Infinity;
+	t.is(limit.concurrency, Infinity);
+});
+
+test('rejects invalid concurrency updates without changing the limit', t => {
+	const limit = pLimit(2);
+	const error = t.throws(() => {
+		limit.concurrency = 1.2;
+	}, {instanceOf: TypeError, message: 'Expected `concurrency` to be a positive integer or `Infinity`'});
+
+	t.is(limit.concurrency, 2);
+	t.is(error.message, 'Expected `concurrency` to be a positive integer or `Infinity`');
 });
 
 test('change concurrency to smaller value', async t => {
