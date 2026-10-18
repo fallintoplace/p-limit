@@ -37,9 +37,8 @@ Returns a `limit` function.
 #### concurrency
 
 Type: `number | object`\
-Minimum: `1`
 
-Concurrency limit.
+Concurrency limit. Must be a positive integer or `Infinity`.
 
 You can pass a number or an options object with a `concurrency` property.
 
@@ -144,9 +143,8 @@ Type: `object`
 #### concurrency
 
 Type: `number`\
-Minimum: `1`
 
-Concurrency limit.
+Concurrency limit. Must be a positive integer or `Infinity`.
 
 #### rejectOnClear
 

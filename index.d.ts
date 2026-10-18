@@ -61,7 +61,7 @@ export type LimitFunction = {
 /**
 Run multiple promise-returning & async functions with limited concurrency.
 
-@param concurrency - Concurrency limit. Minimum: `1`. You can pass a number or an options object with a `concurrency` property.
+@param concurrency - Concurrency limit. It must be a positive integer or `Infinity`. You can pass a number or an options object with a `concurrency` property.
 @returns A `limit` function.
 
 @example
@@ -94,7 +94,7 @@ export type Options = {
 	/**
 	Concurrency limit.
 
-	Minimum: `1`.
+	Must be a positive integer or `Infinity`.
 	*/
 	readonly concurrency: number;
 
